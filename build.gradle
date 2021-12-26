@@ -1,5 +1,5 @@
 buildscript {
-    ext{
+    ext{ // 전역
         springBootVersion = '2.1.7.RELEASE'
     }
     repositories {
@@ -25,10 +25,9 @@ repositories {
     mavenCentral()
 
 }
-
+// 의존성 즉 library를 다운.
 dependencies {
-
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok') // lombok
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
