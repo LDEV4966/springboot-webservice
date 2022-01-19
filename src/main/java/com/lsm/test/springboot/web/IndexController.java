@@ -10,4 +10,9 @@ public class IndexController {
     public String index(){
         return "index"; // gradle의 mustache-starter 덕분에 경로설정 및 머스테치 확장자가 자동으로 설정됨
     }
+
+    @GetMapping("/posts/save")
+    public String postsSave(){
+        return "posts-save";
+    }
 }
