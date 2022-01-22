@@ -27,6 +27,7 @@ repositories {
 }
 // 의존성 즉 library를 다운.
 dependencies {
+
     compile('org.springframework.boot:spring-boot-starter-web')
 
     compile('org.projectlombok:lombok') // lombok
@@ -35,9 +36,9 @@ dependencies {
 
     compile('com.h2database:h2') // 인메모리 관계형 데이타베이스, 메모리에서만 실행되기에 재시작 할때마다 초기화 된다는 점을 이용하여 테스트용도로 많이 사용됨
 
-    compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('org.springframework.boot:spring-boot-starter-mustache') // 뷰
 
-    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client') // 소셜로그인시 필요한 의존성, spring-security-oauth2-client를 관리
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
