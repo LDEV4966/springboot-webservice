@@ -53,7 +53,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         httpSession.setAttribute("user",new SessionUser(user));
 
         return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
+                Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())), // singleton : 단 한개의 객체만 저장 가능한 컬렉션을 만들고 싶을 때 사용한다.
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey()
         );
