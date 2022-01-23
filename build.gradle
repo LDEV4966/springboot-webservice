@@ -42,5 +42,5 @@ dependencies {
 
     compile('org.springframework.session:spring-session-jdbc') // jdbc로 세션 저장소 설정
 
- 정  testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
