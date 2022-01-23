@@ -43,4 +43,6 @@ dependencies {
     compile('org.springframework.session:spring-session-jdbc') // jdbc로 세션 저장소 설정
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    testCompile('org.springframework.security:spring-security-test')// testCode를 위한 임의의 인증된 사용자를 형성하기위한 의존성 추가
 }
