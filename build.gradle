@@ -40,5 +40,7 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter-oauth2-client') // 소셜로그인시 필요한 의존성, spring-security-oauth2-client를 관리
 
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.session:spring-session-jdbc') // jdbc로 세션 저장소 설정
+
+ 정  testCompile('org.springframework.boot:spring-boot-starter-test')
 }
