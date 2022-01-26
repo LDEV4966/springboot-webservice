@@ -2,7 +2,6 @@ package com.lsm.test.springboot.web.domain.posts;
 
 import com.lsm.test.springboot.domain.posts.Posts;
 import com.lsm.test.springboot.domain.posts.PostsRepository;
-import javafx.geometry.Pos;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
