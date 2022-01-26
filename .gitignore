@@ -9,3 +9,14 @@ src/main/resources/application-oauth.properties
 .gradle
 .idea
 
+.DS_Store
+
+*.asp
+*.cer
+*.csr
+*.css
+*.htm
+*.html
+*.bin
+*.xml
+
