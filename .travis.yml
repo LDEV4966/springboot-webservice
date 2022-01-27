@@ -26,13 +26,24 @@ before_deploy:
 #aws s3,codeDeploy 과 같은 외부 서비스와 연동 될 행위들을 선언
 deploy:
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: lsm-springboot-webservice-build
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: lsm-springboot-webservice-build  #s3 버킷
     region: ap-northeast-2
     skip_cleanup: true
-    acl: private
-    local_dir: deploy
+    acl: private # 파일접근을 private으로
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: lsm-springboot-webservice-build #s3 버킷
+    key: springboot2-webservice.zip  # 빌드파일을 압축해서 전달
+    bundle_type: zip
+    application: springboot-webservice # aws 웹 콘솔에서 등록한 codedeploy 애플리케이션
+    deployment_group: springboot-webservice-group # aws 웹 콘솔에서 등록한 codedeploy 배포 그룹
+    region: ap-northeast-2
     wait-until-deployed: true
 
 #CI 실행 완료시 메일로 알람
