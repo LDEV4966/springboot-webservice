@@ -20,3 +20,4 @@ src/main/resources/application-oauth.properties
 *.bin
 *.xml
 
+build/test-results/test/binary/output.bin.idx
