@@ -17,11 +17,16 @@ cache:
 # master 브랜치에 푸쉬 되었을 때, 수행하는 명령어로 , 프로젝트 내부에둔 gradlew을 통해 clean&build 수행
 script: "./gradlew clean build"
 
-# build한 파일을 'springboot2-webservice'을 zip 파일로 묶어 deploy 파일 내에 private으로 저장한다.
+# before-deploy/ 밑에 deploy할 모든 파일들(jar,appsepc.yml,배포를 위한 스크립트)을 넣어 압축한 뒤, 이를 상위에 deploy 폴더에 옮긴다.
 before_deploy:
-  - zip -r springboot2-webservice *
-  - mkdir -p deploy
-  - mv springboot2-webservice.zip deploy/springboot2-webservice.zip
+  - mkdir -p before-deploy #Travis CI는 파일로 s3에 업로드가 불가능하다. 그래서 항상 디렉토리 생성을 해줘 야 함.
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy *
+  - cd ../ && mkdir -p deploy
+  - mv before-deploy/before-deploy.zip deploy/springboot-webservice.zip
+
 
 #aws s3,codeDeploy 과 같은 외부 서비스와 연동 될 행위들을 선언
 deploy:
@@ -39,7 +44,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
     bucket: lsm-springboot-webservice-build #s3 버킷
-    key: springboot2-webservice.zip  # 빌드파일을 압축해서 전달
+    key: springboot-webservice.zip  # 빌드파일을 압축해서 전달
     bundle_type: zip
     application: springboot-webservice # aws 웹 콘솔에서 등록한 codedeploy 애플리케이션
     deployment_group: springboot-webservice-group # aws 웹 콘솔에서 등록한 codedeploy 배포 그룹
