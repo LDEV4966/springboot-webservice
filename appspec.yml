@@ -6,7 +6,7 @@ os: linux
 # CodeDeploy에서 전달해준 파일중 destination으로 이동 시킬 대상을 지정한다. / 이면 전체 파일을 이야기함
 files:
   - source: /
-    destination: /home/ec2-user/app/step2/zip/
+    destination: /home/ec2-user/app/step3/zip/
     overwrite: yes # 덮어쓰기
 
 # CodeDeploy에서 EC2 서버로 넘겨준 파일들을 모두 ec2-user 권한을 가지도록 한다.
@@ -17,9 +17,17 @@ permission:
     group: ec2-user
 # CodeDeploy 배포 단계에서 실행할 명령어를 지정. ApplicationStart라는 단계에서 deploy.sh를 ec2-user권한으로 실행하게 된다.
 hooks:
+  AferInstall:
+    - location: stop.sh # 엔진엑스와 연결되어 있지 않은 스프링 부트를 종료 합니다.
+      timeout: 60
+      runas: ec2-user
   ApplicationStart:
-    - location: deploy.sh
+    - location: start.sh # 엔진엑스와 연결되어 있지 않은 port로 새번의 스프링 부트를 시작한다.
       timeout: 60 #  60초이상  기다릴 시 실패
+      runas: ec2-user
+  ValidateService:
+    - location: health.sh # 새 스프링부트가 정상적으로 실행됐는지 확인
+      timeout: 60
       runas: ec2-user
 
 
