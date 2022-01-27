@@ -1,7 +1,7 @@
 language: java
 
 jdk:
-  -openjdk8
+  - openjdk8
 
 # Travis가 어느 브랜치가 푸쉬되었을 때 수행할 지 지정
 branches:
