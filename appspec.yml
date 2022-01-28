@@ -17,7 +17,7 @@ permission:
     group: ec2-user
 # CodeDeploy 배포 단계에서 실행할 명령어를 지정. ApplicationStart라는 단계에서 deploy.sh를 ec2-user권한으로 실행하게 된다.
 hooks:
-  AferInstall:
+  AfterInstall:
     - location: stop.sh # 엔진엑스와 연결되어 있지 않은 스프링 부트를 종료 합니다.
       timeout: 60
       runas: ec2-user
